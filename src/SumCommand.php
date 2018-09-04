@@ -2,29 +2,51 @@
 
 namespace Egorov;
 
+use FFormula\Sum;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use FFormula\Sum;
 
 class SumCommand extends Command
 {
-    public function configure()
+    /** @var int */
+    private $firstArgument;
+
+    /** @var int */
+    private $secondArgument;
+
+    public function configure(): void
     {
         $this->setName('sum')
-             ->setDescription('This command shows numbers for you')
-             ->addArgument('a', InputArgument::REQUIRED, 'First number')
-             ->addArgument('b', InputArgument::REQUIRED, 'Second number');
+            ->setDescription('This command shows numbers for you')
+            ->addArgument('first_argument', InputArgument::REQUIRED, 'First number')
+            ->addArgument('second_argument', InputArgument::REQUIRED, 'Second number');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output): void
+    {
+        parent::initialize($input, $output);
+
+        $this->firstArgument = (int)$input->getArgument('first_argument');
+        $this->secondArgument = (int)$input->getArgument('second_argument');
+    }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $a = $input->getArgument('a');
-        $b = $input->getArgument('b');
-        $s = new Sum();
-        $res = $s->sum($a, $b);
-        $output->writeln($res);
+        $sum = new Sum();
+        $result = $sum->sum($this->firstArgument, $this->secondArgument);
+
+        $output->writeln($result);
     }
 }
-
