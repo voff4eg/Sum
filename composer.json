@@ -1,12 +1,14 @@
 {
-    "require": {
-        "symfony/console": "^4.1",
-        "fformula/sum": "^1.0",
-        "php": "^7.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "Egorov\\": "src"
-        }
+  "name": "egorov/sum",
+  "description": "sum calculating package",
+  "require": {
+    "symfony/console": "^4.1",
+    "fformula/sum": "^1.0",
+    "php": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Egorov\\": "src"
     }
+  }
 }
