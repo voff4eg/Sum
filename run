@@ -9,4 +9,3 @@ use Egorov\SumCommand;
 $app = new Application('Welcome from Console', 'v.1.0.0');
 $app->add(new SumCommand());
 $app->run();
-
