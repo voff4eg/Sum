@@ -46,7 +46,14 @@ class SumCommand extends Command
     {
         $sum = new Sum();
         $result = $sum->sum($this->firstArgument, $this->secondArgument);
-
         $output->writeln($result);
+
+        $sumWithNonRestrictedArguments = new \Egorov\Sum();
+        $output->writeln(sprintf(
+            'Sum with non restricted arguments %d + %d = %d',
+            $this->firstArgument,
+            $this->secondArgument,
+                $sumWithNonRestrictedArguments($this->firstArgument, $this->secondArgument)
+        ));
     }
 }
